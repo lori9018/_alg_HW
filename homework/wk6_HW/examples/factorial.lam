@@ -1,0 +1,37 @@
+# ============================================================
+# Church 編碼：階乘 factorial
+# ------------------------------------------------------------
+# 全部只用 lambda 與變數，沒有任何數字或內建運算。
+# 最後一行 fact 3 是要計算的目標運算式。
+# ============================================================
+
+# --- 布林值（Church booleans）---
+true  = \x. \y. x
+false = \x. \y. y
+
+# --- Church 數（Church numerals）---
+# n 代表「把 f 套用 n 次」：n f x = f (f (... (f x)))
+zero = \f. \x. x
+one  = \f. \x. f x
+
+# succ n = n + 1
+succ = \n. \f. \x. f (n f x)
+
+# mult m n = m * n
+mult = \m. \n. \f. m (n f)
+
+# iszero n：n 是否為 0
+iszero = \n. n (\x. false) true
+
+# pred n = n - 1（Church 前驅函數）
+pred = \n. \f. \x. n (\g. \h. h (g f)) (\u. x) (\u. u)
+
+# --- 遞迴：Y 組合子（normal order 版本）---
+Y = \f. (\x. f (x x)) (\x. f (x x))
+
+# --- 階乘 ---
+# fact n = if (n == 0) then 1 else n * fact (n - 1)
+fact = Y (\f. \n. (iszero n) one (mult n (f (pred n))))
+
+# --- 計算 3! = 6 ---
+fact 3

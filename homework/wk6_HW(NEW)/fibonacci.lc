@@ -1,0 +1,8 @@
+-- fibonacci.lc：FIB n = if n <= 1 then n else FIB(n-1) + FIB(n-2)
+-- 用法：python lambda_calc.py fibonacci.lc --max 20000
+FIB = Y (\f n. IF (LEQ n 1) n (PLUS (f (PRED n)) (f (SUB n 2))))
+
+FIB 0
+FIB 1
+FIB 2
+FIB 3

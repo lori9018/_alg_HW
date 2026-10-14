@@ -1,0 +1,8 @@
+-- factorial.lc：用 Y combinator 定義階乘（Prelude 由 lambda_calc.py 自動載入）
+-- 用法：python lambda_calc.py factorial.lc --max 20000
+FACT = Y (\f n. IF (ISZERO n) 1 (MULT n (f (PRED n))))
+
+FACT 0
+FACT 1
+FACT 2
+FACT 3
