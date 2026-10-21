@@ -1,0 +1,66 @@
+"""
+C(n, k):從 n 個不同元素中取出 k 個的組合數
+核心關係(巴斯卡恆等式):
+    C(n, k) = C(n-1, k-1) + C(n-1, k)
+    C(n, 0) = C(n, n) = 1
+"""
+
+import time
+
+
+# ======================================================
+# 版本一:非動態規劃
+# ======================================================
+
+def comb_recursive(n, k):
+    """純遞迴(暴力法)。
+    時間複雜度 O(2^n):同一個子問題會被重複計算很多次,n 大時很慢。
+    """
+    if k < 0 or k > n:
+        return 0
+    if k == 0 or k == n:
+        return 1
+    return comb_recursive(n - 1, k - 1) + comb_recursive(n - 1, k)
+
+
+def comb_formula(n, k):
+    """直接用公式 C(n,k) = n(n-1)...(n-k+1) / k!  (迭代乘除)。
+    時間複雜度 O(k),空間複雜度 O(1)。
+    每一步的 result 都剛好是整數,所以可以安全使用 //。
+    """
+    if k < 0 or k > n:
+        return 0
+    k = min(k, n - k)  # 利用對稱性 C(n,k) = C(n,n-k) 減少運算
+    result = 1
+    for i in range(1, k + 1):
+        result = result * (n - k + i) // i
+    return result
+
+
+
+# ======================================================
+# 測試
+# ======================================================
+
+def timeit(func, n, k):
+    start = time.perf_counter()
+    value = func(n, k)
+    return value, time.perf_counter() - start
+
+
+if __name__ == "__main__":
+    # 正確性測試
+    tests = [(5, 2), (10, 3), (20, 10), (6, 0), (6, 6), (4, 5)]
+    print("=== 正確性測試 ===")
+    for n, k in tests:
+        r = [comb_recursive(n, k), comb_formula(n, k),]
+        status = "OK" if len(set(r)) == 1 else "ERROR"
+        print(f"C({n},{k}) = {r[0]}  [{status}]")
+
+    # 效能比較
+    n, k = 25, 12
+    print(f"\n=== 耗時 C({n},{k}) ===")
+    for name, f in [("純遞迴      ", comb_recursive),
+                    ("公式迭代    ", comb_formula),]:
+        v, t = timeit(f, n, k)
+        print(f"{name}: {v}  耗時 {t:.6f} 秒")

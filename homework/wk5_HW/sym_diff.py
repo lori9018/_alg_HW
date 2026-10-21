@@ -128,7 +128,7 @@ def simplify(e):
 
 
 def to_str(e):
-    """把 AST 轉回人類可讀的字串。"""
+    """把 AST 轉回可讀的字串。"""
     if is_num(e):
         return str(e)
     if isinstance(e, str):
