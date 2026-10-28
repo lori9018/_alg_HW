@@ -333,22 +333,4 @@ while 還有未造訪的城市:
 | 梯度下降（彈性網路） | 觀念可推廣到機器學習 | 需連續化，結果依賴參數 |
 | 貪婪演算法 | 極快、完全確定 | 品質差 |
 
----
-
-## 6. 延伸練習
-
-1. **放大問題規模**：把 `N_CITIES` 改成 100、200，觀察五種方法的差距如何擴大。在大問題上，貪婪法與爬山法會明顯落後。
-2. **組合方法**：用貪婪法的結果當 2-opt 的初始解，看是否比用依編號排列的初始解更好。
-3. **調整 SA 參數**：改變 `COOLING`（例如 0.9、0.999），畫出「降溫速度 vs. 路徑品質 vs. 耗時」的關係。
-4. **畫出路徑**：用 `matplotlib` 畫出城市與各方法的路徑，直觀比較（2-opt 的結果應該沒有交叉線）。
-5. **多次實驗取平均**：隨機性方法每次結果不同，可換不同 `ALGO_SEED` 跑 30 次，統計平均值與標準差。
-6. **加速計算**：把爬山法與 SA 改成只計算 Δ（變化量）而不是整條路徑重算，並量測加速幅度。
-7. **嘗試其他方法**：遺傳演算法、蟻群演算法、Or-opt、Lin-Kernighan，以及用動態規劃（Held-Karp）求小規模的精確解來驗證最佳值。
-
----
-
-## 參考資料
-
-- Durbin, R. & Willshaw, D. (1987). *An analogue approach to the travelling salesman problem using an elastic net method.* Nature, 326, 689–691.
-- Kirkpatrick, S., Gelatt, C. D., & Vecchi, M. P. (1983). *Optimization by Simulated Annealing.* Science, 220(4598), 671–680.
-- Croes, G. A. (1958). *A Method for Solving Traveling-Salesman Problems.* Operations Research, 6(6), 791–812.（2-opt 的原始論文）
+-
