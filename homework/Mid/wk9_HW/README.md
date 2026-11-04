@@ -478,3 +478,5 @@ CCCCCCCCCC      C：沿最下排（線長 9）
 | 換皇后數量 | `3_eight_queens_dfs.py` 的 `N`（N=1…12 都很快） |
 | 換地圖／玩家位置 | `4_npc_astar.py` 的 `MAP`、`npc`、`player` |
 | 增加線網 | `5_circuit_routing_lee.py` 的 `NETS`，試試交換順序看會不會繞線失敗 |
+
+## [AI對話紀錄](https://claude.ai/share/7e50af75-d516-45ee-b7de-f05dcfddd9a4)
